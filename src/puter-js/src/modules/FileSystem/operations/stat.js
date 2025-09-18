@@ -31,7 +31,7 @@ const stat = async function (...args) {
         }
 
         // create xhr object
-        const xhr = utils.initXhr('/stat', this.APIOrigin, this.authToken);
+        const xhr = utils.initXhr('/stat', this.APIOrigin, undefined, "post", "text/plain;actually=json");
 
         // set up event handlers for load and error events
         utils.setupXhrEventHandlers(xhr, options.success, options.error, resolve, reject);
@@ -49,6 +49,7 @@ const stat = async function (...args) {
         dataToSend.return_permissions = options.returnPermissions;
         dataToSend.return_versions = options.returnVersions;
         dataToSend.return_size = options.returnSize;
+        dataToSend.auth_token = this.authToken;
 
         xhr.send(JSON.stringify(dataToSend));
     })
